@@ -6,7 +6,7 @@ The app was built with functional components and react-hooks without classes. Ap
 
 The application is available here https://react-pokemon-e1131.web.app/
 
-# Getting Started with Create React App
+# Getting Started 
 
 For starting project after downloading repo use 
 npm run start and does not forget dependency (npm install)
