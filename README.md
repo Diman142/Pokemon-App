@@ -4,9 +4,12 @@ This is application for searching of pokemons. For creating of this app I used n
 
 The app was built with functional components and react-hooks without classes. App has some mobile adaptation you can use it with any devices.
 
+The application is available here https://react-pokemon-e1131.web.app/
+
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+For starting project after downloading repo use 
+npm run start and doesnot forgot dependency (npm install)
 
 ## Available Scripts
 
