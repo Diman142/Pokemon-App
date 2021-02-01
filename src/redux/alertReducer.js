@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { SHOW_SEARCH_ALERT, HIDE_SEARCH_ALERT, SHOW_SERVER_ALERT, HIDE_SERVER_ALERT } from './types'
 
 const initialState = {

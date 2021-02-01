@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { SET_POKEMONS, CHANGE_SEARCH_VALUE, SET_CURRENT_POKEMONS } from './types'
 
 const initialState = {

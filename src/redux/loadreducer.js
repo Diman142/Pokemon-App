@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { SHOW_LOADER, HIDE_LOADER } from './types'
 
 const initialState = {

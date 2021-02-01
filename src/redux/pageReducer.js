@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { GET_POKEMON_INFO, GO_TO_POKEMON, SHOW_PAGE_LOADER, HIDE_PAGE_LOADER } from './types'
 
 const initialState = {

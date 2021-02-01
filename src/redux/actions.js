@@ -1,5 +1,8 @@
-import { SHOW_LOADER, HIDE_LOADER, GET_DATA, SET_POKEMONS, CHANGE_SEARCH_VALUE, SET_CURRENT_POKEMONS, GO_TO_POKEMON, GET_POKEMON_INFO, SHOW_PAGE_LOADER, HIDE_PAGE_LOADER, SHOW_SEARCH_ALERT, HIDE_SEARCH_ALERT, SHOW_SERVER_ALERT, HIDE_SERVER_ALERT } from './types'
 import axios from 'axios'
+import {
+  SHOW_LOADER, HIDE_LOADER, GET_DATA, SET_POKEMONS, CHANGE_SEARCH_VALUE, SET_CURRENT_POKEMONS, GO_TO_POKEMON,
+  GET_POKEMON_INFO, SHOW_PAGE_LOADER, HIDE_PAGE_LOADER, SHOW_SEARCH_ALERT, HIDE_SEARCH_ALERT, SHOW_SERVER_ALERT, HIDE_SERVER_ALERT
+} from './types'
 
 
 export function showLoader() {
@@ -44,9 +47,19 @@ export function hideServerAlert() {
   }
 }
 
+export function showPokemonLoader() {
+  return {
+    type: SHOW_PAGE_LOADER
+  }
+}
 
+export function hidePokemonLoader() {
+  return {
+    type: HIDE_PAGE_LOADER
+  }
+}
 
-//Home
+// Home
 
 function getData(data) {
   return {
@@ -64,9 +77,9 @@ export function getCards() {
   if (window.screen.width < 540) {
     limit = 3
   }
-  let arr = []
+  const arr = []
   let newState = []
-  let offset = Math.floor(Math.random() * 101)
+  const offset = Math.floor(Math.random() * 101)
   return async dispatch => {
     try {
       dispatch(showLoader());
@@ -75,12 +88,10 @@ export function getCards() {
         arr.push(axios.get(`${item.url}`))
       })
       const res = await axios.all(arr)
-      newState = res.map(item => {
-        return {
-          name: item.data.name,
-          imgURL: item.data.sprites.other["official-artwork"].front_default
-        }
-      })
+      newState = res.map(item => ({
+        name: item.data.name,
+        imgURL: item.data.sprites.other["official-artwork"].front_default
+      }))
       dispatch(getData(newState))
     }
     catch {
@@ -92,7 +103,7 @@ export function getCards() {
   }
 }
 
-//POkemonList
+// POkemonList
 function setPokemons(pokemonNames) {
   return {
     type: SET_POKEMONS,
@@ -110,7 +121,7 @@ function setCurrentPokemons(pokemonNames) {
 export function getPokemons() {
 
   return async dispatch => {
-    let arr = []
+    const arr = []
 
     try {
       dispatch(hideServerAlert())
@@ -131,9 +142,7 @@ export function getPokemons() {
   }
 }
 
-
-//Search
-
+// Search
 
 export function changeSearchValue(inputValue) {
   return dispatch => {
@@ -145,8 +154,8 @@ export function changeSearchValue(inputValue) {
 }
 
 export function findPokemon(filterValue, pokemArr) {
-  let oldPokemon = [...pokemArr]
-  let newPokemonArr = oldPokemon.filter(pokemon => pokemon.includes(filterValue))
+  const oldPokemon = [...pokemArr]
+  const newPokemonArr = oldPokemon.filter(pokemon => pokemon.includes(filterValue.toLowerCase()))
   if (newPokemonArr.length === 0) {
     return dispatch => {
       dispatch(showSearchAlert())
@@ -159,7 +168,7 @@ export function findPokemon(filterValue, pokemArr) {
   }
 }
 
-//pokemon page
+// pokemon page
 
 export function PokemonPage(pokemonName) {
 
@@ -176,14 +185,12 @@ export function pokemonInfo(info) {
   }
 }
 
-
 export function goToPokemon(pokemonName) {
 
   return dispatch => {
     dispatch(PokemonPage(pokemonName))
   }
 }
-
 
 export function getPokemonInfo(URLpath) {
   return async dispatch => {
@@ -203,14 +210,3 @@ export function getPokemonInfo(URLpath) {
 }
 
 
-export function showPokemonLoader() {
-  return {
-    type: SHOW_PAGE_LOADER
-  }
-}
-
-export function hidePokemonLoader() {
-  return {
-    type: HIDE_PAGE_LOADER
-  }
-}

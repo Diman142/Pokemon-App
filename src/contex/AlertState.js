@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
+import React from 'react'
 import { AlertContext, alerts } from './AlertContext'
 
-export const AlertState = ({ children }) => {
+const AlertState = ({ children }) => (
+  <AlertContext.Provider value={alerts}>
+    {children}
+  </AlertContext.Provider>
+)
 
-  return (
-    <AlertContext.Provider value={alerts}>
-      {children}
-    </AlertContext.Provider>
-  )
-}
+export default AlertState

@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 // Different context for alert
 
 export const alerts = {
