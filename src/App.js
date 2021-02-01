@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
+import { connect } from 'react-redux'
+import { PokemonNav } from './components/PokemonNav'
+import Home from './components/Home'
+import PokemonList from './components/PokemonList'
+import { About } from './components/About'
+import PokemonPage from './components/PokemonPage'
+import { AlertState } from './contex/AlertState'
 
-function App() {
+
+function App({ pagePath }) {
+
+
+  let routes = (
+    <Switch>
+      <Route path="/pokemonlist" component={PokemonList} />
+      <Route path="/about" component={About} />
+      <Route path="/" component={Home} />
+    </Switch>
+  )
+
+  if (pagePath !== "test") {
+    routes = (
+      <Switch>
+        <Route path={"/" + pagePath} render={(props) => <PokemonPage pokemonName={pagePath} {...props} />} />
+        <Route path="/pokemonlist" component={PokemonList} />
+        <Route path="/about" component={About} />
+        <Route path="/" component={Home} />
+      </Switch>
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <AlertState>
+        <PokemonNav />
+        {routes}
+      </AlertState>
+    </React.Fragment>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  pagePath: state.goToPage.linkPath
+})
+
+
+export default withRouter(connect(mapStateToProps, null)(App));
