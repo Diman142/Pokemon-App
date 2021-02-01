@@ -9,7 +9,7 @@ The application is available here https://react-pokemon-e1131.web.app/
 # Getting Started with Create React App
 
 For starting project after downloading repo use 
-npm run start and doesnot forgot dependency (npm install)
+npm run start and does not forget dependency (npm install)
 
 ## Available Scripts
 
